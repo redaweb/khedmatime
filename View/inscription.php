@@ -1,3 +1,8 @@
+<?php
+session_start();
+$error = $_SESSION['error'] ?? null;
+unset($_SESSION['error']);
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -35,6 +40,11 @@
                 </div>
 
                 <form class="space-y-5" action="../model/inscription.php" method="POST" enctype="multipart/form-data">
+                    <?php if ($error): ?>
+                        <div class="bg-red-50 border border-red-200 text-red-700 text-sm p-3 rounded-md">
+                            <?php echo htmlspecialchars($error); ?>
+                        </div>
+                    <?php endif; ?>
                     
                     <div class="grid grid-cols-2 gap-4">
                         <div class="space-y-1">

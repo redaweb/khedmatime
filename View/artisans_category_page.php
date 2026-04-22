@@ -13,6 +13,8 @@ foreach ($requiredKeys as $requiredKey) {
 $category = $pageConfig['category'];
 include '../model/get_services_by_category.php';
 include '../includes/header.php';
+$categoryParam = isset($_GET['categorie']) ? trim($_GET['categorie']) : '';
+$isProximiteActive = (($_GET['proximite'] ?? '0') === '1');
 ?>
 
 <div class="container mx-auto px-4">
@@ -30,6 +32,43 @@ include '../includes/header.php';
                 <?php echo count($services); ?> <?php echo htmlspecialchars($pageConfig['countLabel']); ?>
             </span>
         </p>
+    </div>
+
+    <div class="bg-white border border-gray-100 rounded-2xl shadow-sm p-4 md:p-5 mb-8">
+        <form method="GET" action="artisans.php" class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+            <input type="hidden" name="categorie" value="<?php echo htmlspecialchars($categoryParam); ?>">
+
+            <div class="md:col-span-2">
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Filtrer par wilaya</label>
+                <select name="wilaya" class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 outline-none transition bg-white">
+                    <option value="">Toutes les wilayas</option>
+                    <?php foreach (($wilayaOptions ?? []) as $wilaya): ?>
+                        <option value="<?php echo htmlspecialchars($wilaya); ?>" <?php echo (($_GET['wilaya'] ?? '') === $wilaya) ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($listeWilayas[$wilaya]); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <div>
+                <label class="inline-flex items-center gap-2 mt-7">
+                    <input type="checkbox" name="proximite" value="1" <?php echo $isProximiteActive ? 'checked' : ''; ?> <?php echo isset($_SESSION['user_id']) ? '' : 'disabled'; ?>>
+                    <span class="text-sm text-gray-700">Prestataires à proximité</span>
+                </label>
+                <?php if (!isset($_SESSION['user_id'])): ?>
+                    <p class="text-xs text-gray-400 mt-1">Connectez-vous pour activer ce filtre.</p>
+                <?php endif; ?>
+            </div>
+
+            <div class="flex gap-2">
+                <button type="submit" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-2.5 px-4 rounded-md transition">
+                    Appliquer
+                </button>
+                <a href="artisans.php?categorie=<?php echo urlencode($categoryParam); ?>" class="w-full text-center bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2.5 px-4 rounded-md transition">
+                    Reset
+                </a>
+            </div>
+        </form>
     </div>
 
     <?php if (count($services) > 0): ?>

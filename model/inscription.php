@@ -21,6 +21,15 @@ try {
             throw new Exception("Rôle invalide");
         }
 
+        $stmtTelephone = $pdo->prepare("SELECT COUNT(*) FROM utilisateur WHERE telephone = :telephone");
+        $stmtTelephone->execute([':telephone' => $telephone]);
+        if ((int) $stmtTelephone->fetchColumn() > 0) {
+            $pdo->rollBack();
+            $_SESSION['error'] = "Numéro déjà utilisé.";
+            header('Location: ../view/inscription.php');
+            exit();
+        }
+
         $sql = "INSERT INTO utilisateur 
                 (nom, prenom, telephone, adress, wilaya, mot_de_passe, role)
                 VALUES (:nom, :prenom, :telephone, :adresse, :wilaya, :password, :role)";
@@ -96,8 +105,11 @@ try {
     }
 
 } catch(Exception $e) {
-
-    $pdo->rollBack();
-    echo "Erreur : " . $e->getMessage();
+    if ($pdo->inTransaction()) {
+        $pdo->rollBack();
+    }
+    $_SESSION['error'] = "Erreur inscription: " . $e->getMessage();
+    header('Location: ../view/inscription.php');
+    exit();
 }
 ?>
