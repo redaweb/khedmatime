@@ -1,0 +1,169 @@
+/* ===== HERO ===== */
+.hero {
+    height: 550px;
+    display: flex;
+    align-items: center;
+    background-image:
+        linear-gradient(to right, rgba(59, 134, 245, 0.75), rgba(21, 138, 216, 0.2)),
+        url("../images/artisan.jpg");
+    background-size: contain; 
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+
+.hero-text {
+    width: 50%;
+    margin-left: 80px;
+}
+
+.hero-text h1 {
+    font-size: 42px;
+    color: white;
+}
+
+.hero-text p {
+    font-size: 18px;
+    margin: 20px 0;
+    color: #e6ecff;
+}
+
+.filters {
+    margin: 20px 0;
+}
+
+.filter-btn {
+    padding: 10px 18px;
+    border-radius: 25px;
+    border: none;
+    margin-right: 10px;
+    cursor: pointer;
+    background: white;
+    color: #1e4dd8;
+    font-weight: bold;
+}
+
+.filter-btn.active {
+    background: #ffcc00;
+    color: black;
+}
+
+.btn-main {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border-radius: 25px;
+    border: none;
+    background: #112fef;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+.advantages {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px;
+    background: #f5f5f5;
+}
+
+.advantages .card {
+    width: 25%;
+    text-align: center;
+}
+
+
+
+.categorie {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.categorie h1 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.categorie p {
+    color: #6b7280;
+    margin-bottom: 50px;
+    font-size: 15px;
+}
+
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(260px, 1fr));
+    gap: 30px;
+    max-width: 1150px;
+    margin: auto;
+}
+.cards a{
+    text-decoration: rgb(0, 0, 0);
+}
+
+
+.cards .card {
+    background: #ffffff;
+    padding: 25px 30px;
+    border-radius: 18px;
+    text-align: left;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-height: 200px;
+}
+
+.cards .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.1);
+}
+
+
+.icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.blue   { background: #e0edff; color: #2563eb; }
+.yellow { background: #fef3c7; color: #d97706; }
+.orange { background: #ffedd5; color: #ea580c; }
+.gray   { background: #f3f4f6; color: #374151; }
+.purple { background: #f3e8ff; color: #9333ea; }
+.cyan   { background: #cffafe; color: #0891b2; }
+
+
+.cards .card h3 {
+    margin: 15px 0 8px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.cards .card p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #6b7280;
+}
+
+
+@media (max-width: 992px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-text {
+        width: 90%;
+        margin-left: 20px;
+    }
+}

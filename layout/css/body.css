@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    color: #111827;
+    line-height: 1.5;
+
+}
+
+/*
+:root {
+    --primary-blue: #1a4a9e;
+    --text-dark: #2d2d2d;
+    --text-light: #717171;
+    --border-color: #e2e8f0;
+}*/
+/*
+body {
+
+    margin: 0;
+    color: var(--text-dark);
+    line-height: 1.5;
+}*/
