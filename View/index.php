@@ -74,7 +74,7 @@
     </div>
 </section>
 
-<section class="py-12 container mx-auto px-4">
+<section id="services" class="py-12 container mx-auto px-4">
     <h2 class="text-2xl font-bold text-center mb-10 text-gray-800">Explorez nos services les plus demandés</h2>
     
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -128,7 +128,7 @@
 </a>
         <a href="artisans.php?categorie=peinture">
         <div class="relative group overflow-hidden rounded-2xl shadow-md h-64 cursor-pointer">
-            <img src="https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&q=80&w=600">
+            <img src="https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-6">
                 <span class="text-white font-bold text-lg">Peinture</span>
                 <p class="text-gray-200 text-xs">Intérieur, extérieur, enduit</p>

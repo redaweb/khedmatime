@@ -34,7 +34,7 @@
                     <p class="text-gray-500 text-sm mt-2">Inscrivez-vous pour accéder à nos services.</p>
                 </div>
 
-                <form class="space-y-5" action="../model/inscription.php" method="POST">
+                <form class="space-y-5" action="../model/inscription.php" method="POST" enctype="multipart/form-data">
                     
                     <div class="grid grid-cols-2 gap-4">
                         <div class="space-y-1">
@@ -136,11 +136,18 @@
                     </div>
                     <div class="space-y-1">
                         <label class="block text-sm font-semibold text-gray-700">Je suis un</label>
-                        <select name="role" required class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 outline-none transition bg-white cursor-pointer text-sm">
+                        <select id="role" name="role" required class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 outline-none transition bg-white cursor-pointer text-sm">
                             <option value="">Sélectionner votre profil</option>
                             <option value="client">Client (Je cherche un service)</option>
-                            <option value="Prestataire">Prestataire (Je propose mes services)</option>
+                            <option value="prestataire">Prestataire (Je propose mes services)</option>
                         </select>
+                    </div>
+
+                    <div id="diplomeField" class="space-y-1 hidden">
+                        <label class="block text-sm font-semibold text-gray-700">Diplôme / justificatif (PDF, JPG, PNG)</label>
+                        <input id="diplome" type="file" name="diplome" accept=".pdf,.jpg,.jpeg,.png"
+                               class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 outline-none transition bg-white">
+                        <p class="text-xs text-gray-500">Obligatoire pour les prestataires. Votre compte sera activé après validation admin.</p>
                     </div>
                     
                     <button type="submit" 
@@ -161,5 +168,19 @@
         </div>
     </div>
 
+<script>
+    const roleSelect = document.getElementById('role');
+    const diplomeField = document.getElementById('diplomeField');
+    const diplomeInput = document.getElementById('diplome');
+
+    function toggleDiplomeField() {
+        const isPrestataire = roleSelect.value === 'prestataire';
+        diplomeField.classList.toggle('hidden', !isPrestataire);
+        diplomeInput.required = isPrestataire;
+    }
+
+    roleSelect.addEventListener('change', toggleDiplomeField);
+    toggleDiplomeField();
+</script>
 </body>
 </html>

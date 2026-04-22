@@ -95,10 +95,66 @@ $user = $stmt->fetch();
                         <div class="space-y-2">
                             <label class="block text-sm font-bold text-blue-900">Wilaya</label>
                             <select name="wilaya" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-900 outline-none">
-                                <option value="Alger" <?php if($user['wilaya'] == 'Alger') echo 'selected'; ?>>Alger</option>
-                                <option value="Oran" <?php if($user['wilaya'] == 'Oran') echo 'selected'; ?>>Oran</option>
-                                <option value="Constantine" <?php if($user['wilaya'] == 'Constantine') echo 'selected'; ?>>Constantine</option>
-                                </select>
+                            <option <?php if($user['wilaya'] == '') echo 'selected'; ?> value="">Sélectionner</option>
+                                <option <?php if($user['wilaya'] == '01') echo 'selected'; ?> value="01">01 - Adrar</option>
+                                <option <?php if($user['wilaya'] == '02') echo 'selected'; ?> value="02">02 - Chlef</option>
+                                <option <?php if($user['wilaya'] == '03') echo 'selected'; ?> value="03">03 - Laghouat</option>
+                                <option <?php if($user['wilaya'] == '04') echo 'selected'; ?> value="04">04 - Oum El Bouaghi</option>
+                                <option <?php if($user['wilaya'] == '05') echo 'selected'; ?> value="05">05 - Batna</option>
+                                <option <?php if($user['wilaya'] == '06') echo 'selected'; ?> value="06">06 - Béjaïa</option>
+                                <option <?php if($user['wilaya'] == '07') echo 'selected'; ?> value="07">07 - Biskra</option>
+                                <option <?php if($user['wilaya'] == '08') echo 'selected'; ?> value="08">08 - Béchar</option>
+                                <option <?php if($user['wilaya'] == '09') echo 'selected'; ?> value="09">09 - Blida</option>
+                                <option <?php if($user['wilaya'] == '10') echo 'selected'; ?> value="10">10 - Bouira</option>
+                                <option <?php if($user['wilaya'] == '11') echo 'selected'; ?> value="11">11 - Tamanrasset</option>
+                                <option <?php if($user['wilaya'] == '12') echo 'selected'; ?> value="12">12 - Tébessa</option>
+                                <option <?php if($user['wilaya'] == '13') echo 'selected'; ?> value="13">13 - Tlemcen</option>
+                                <option <?php if($user['wilaya'] == '14') echo 'selected'; ?> value="14">14 - Tiaret</option>
+                                <option <?php if($user['wilaya'] == '15') echo 'selected'; ?> value="15">15 - Tizi Ouzou</option>
+                                <option <?php if($user['wilaya'] == '16') echo 'selected'; ?> value="16">16 - Alger</option>
+                                <option <?php if($user['wilaya'] == '17') echo 'selected'; ?> value="17">17 - Djelfa</option>
+                                <option <?php if($user['wilaya'] == '18') echo 'selected'; ?> value="18">18 - Jijel</option>
+                                <option <?php if($user['wilaya'] == '19') echo 'selected'; ?> value="19">19 - Sétif</option>
+                                <option <?php if($user['wilaya'] == '20') echo 'selected'; ?> value="20">20 - Saïda</option>
+                                <option <?php if($user['wilaya'] == '21') echo 'selected'; ?> value="21">21 - Skikda</option>
+                                <option <?php if($user['wilaya'] == '22') echo 'selected'; ?> value="22">22 - Sidi Bel Abbès</option>
+                                <option <?php if($user['wilaya'] == '23') echo 'selected'; ?> value="23">23 - Annaba</option>
+                                <option <?php if($user['wilaya'] == '24') echo 'selected'; ?> value="24">24 - Guelma</option>
+                                <option <?php if($user['wilaya'] == '25') echo 'selected'; ?> value="25">25 - Constantine</option>
+                                <option <?php if($user['wilaya'] == '26') echo 'selected'; ?> value="26">26 - Médéa</option>
+                                <option <?php if($user['wilaya'] == '27') echo 'selected'; ?> value="27">27 - Mostaganem</option>
+                                <option <?php if($user['wilaya'] == '28') echo 'selected'; ?> value="28">28 - M'Sila</option>
+                                <option <?php if($user['wilaya'] == '29') echo 'selected'; ?> value="29">29 - Mascara</option>
+                                <option <?php if($user['wilaya'] == '30') echo 'selected'; ?> value="30">30 - Ouargla</option>
+                                <option <?php if($user['wilaya'] == '31') echo 'selected'; ?> value="31">31 - Oran</option>
+                                <option <?php if($user['wilaya'] == '32') echo 'selected'; ?> value="32">32 - El Bayadh</option>
+                                <option <?php if($user['wilaya'] == '33') echo 'selected'; ?> value="33">33 - Illizi</option>
+                                <option <?php if($user['wilaya'] == '34') echo 'selected'; ?> value="34">34 - Bordj Bou Arreridj</option>
+                                <option <?php if($user['wilaya'] == '35') echo 'selected'; ?> value="35">35 - Boumerdès</option>
+                                <option <?php if($user['wilaya'] == '36') echo 'selected'; ?> value="36">36 - El Tarf</option>
+                                <option <?php if($user['wilaya'] == '37') echo 'selected'; ?> value="37">37 - Tindouf</option>
+                                <option <?php if($user['wilaya'] == '38') echo 'selected'; ?> value="38">38 - Tissemsilt</option>
+                                <option <?php if($user['wilaya'] == '39') echo 'selected'; ?> value="39">39 - El Oued</option>
+                                <option <?php if($user['wilaya'] == '40') echo 'selected'; ?> value="40">40 - Khenchela</option>
+                                <option <?php if($user['wilaya'] == '41') echo 'selected'; ?> value="41">41 - Souk Ahras</option>
+                                <option <?php if($user['wilaya'] == '42') echo 'selected'; ?> value="42">42 - Tipaza</option>
+                                <option <?php if($user['wilaya'] == '43') echo 'selected'; ?> value="43">43 - Mila</option>
+                                <option <?php if($user['wilaya'] == '44') echo 'selected'; ?> value="44">44 - Aïn Defla</option>
+                                <option <?php if($user['wilaya'] == '45') echo 'selected'; ?> value="45">45 - Naâma</option>
+                                <option <?php if($user['wilaya'] == '46') echo 'selected'; ?> value="46">46 - Aïn Témouchent</option>
+                                <option <?php if($user['wilaya'] == '47') echo 'selected'; ?> value="47">47 - Ghardaïa</option>
+                                <option <?php if($user['wilaya'] == '48') echo 'selected'; ?> value="48">48 - Relizane</option>
+                                <option <?php if($user['wilaya'] == '49') echo 'selected'; ?> value="49">49 - El M'Ghair</option>
+                                <option <?php if($user['wilaya'] == '50') echo 'selected'; ?> value="50">50 - El Meniaa</option>
+                                <option <?php if($user['wilaya'] == '51') echo 'selected'; ?> value="51">51 - Ouled Djellal</option>
+                                <option <?php if($user['wilaya'] == '52') echo 'selected'; ?> value="52">52 - Bordj Baji Mokhtar</option>
+                                <option <?php if($user['wilaya'] == '53') echo 'selected'; ?> value="53">53 - Béni Abbès</option>
+                                <option <?php if($user['wilaya'] == '54') echo 'selected'; ?> value="54">54 - Timimoun</option>
+                                <option <?php if($user['wilaya'] == '55') echo 'selected'; ?> value="55">55 - Touggourt</option>
+                                <option <?php if($user['wilaya'] == '56') echo 'selected'; ?> value="56">56 - Djanet</option>
+                                <option <?php if($user['wilaya'] == '57') echo 'selected'; ?> value="57">57 - In Salah</option>
+                                <option <?php if($user['wilaya'] == '58') echo 'selected'; ?> value="58">58 - In Guezzam</option>
+                            </select>
                         </div>
                     </div>
 

@@ -8,18 +8,22 @@ try {
 
         $pdo->beginTransaction(); 
 
-        $nom = $_POST['nom'];
-        $prenom = $_POST['prenom'];
-        $telephone = $_POST['telephone'];
-        $adresse = $_POST['adresse'];
-        $wilaya = $_POST['wilaya'];
-        $role = $_POST['role'];
-        $mdp = $_POST['password']; 
+        $nom = trim($_POST['nom'] ?? '');
+        $prenom = trim($_POST['prenom'] ?? '');
+        $telephone = trim($_POST['telephone'] ?? '');
+        $adresse = trim($_POST['adresse'] ?? '');
+        $wilaya = trim($_POST['wilaya'] ?? '');
+        $role = strtolower(trim($_POST['role'] ?? ''));
+        $mdp = $_POST['password'] ?? '';
         $password = password_hash($mdp, PASSWORD_DEFAULT);
 
+        if (!in_array($role, ['client', 'prestataire'], true)) {
+            throw new Exception("Rôle invalide");
+        }
+
         $sql = "INSERT INTO utilisateur 
-                (nom, prenom, telephone, adress, wilaya, mot_de_passe)
-                VALUES (:nom, :prenom, :telephone, :adresse, :wilaya, :password)";
+                (nom, prenom, telephone, adress, wilaya, mot_de_passe, role)
+                VALUES (:nom, :prenom, :telephone, :adresse, :wilaya, :password, :role)";
 
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
@@ -28,18 +32,41 @@ try {
             ':telephone' => $telephone,
             ':adresse' => $adresse,
             ':wilaya' => $wilaya,
-            ':password' => $password
+            ':password' => $password,
+            ':role' => $role,
         ]);
 
         $id_user = $pdo->lastInsertId();
 
-        if ($role === "Prestataire") {
+        if ($role === "prestataire") {
+            if (!isset($_FILES['diplome']) || $_FILES['diplome']['error'] !== UPLOAD_ERR_OK) {
+                throw new Exception("Le diplôme est obligatoire pour les prestataires.");
+            }
 
-            $sqlPrestataire = "INSERT INTO prestataire (id_prestataire)
-                               VALUES (:id)";
+            $allowedExtensions = ['pdf', 'jpg', 'jpeg', 'png'];
+            $originalName = $_FILES['diplome']['name'];
+            $extension = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
+            if (!in_array($extension, $allowedExtensions, true)) {
+                throw new Exception("Format de diplôme invalide. Formats acceptés: PDF, JPG, PNG.");
+            }
+
+            $uploadDir = '../uploads/diplomas/';
+            if (!is_dir($uploadDir) && !mkdir($uploadDir, 0777, true) && !is_dir($uploadDir)) {
+                throw new Exception("Impossible de créer le dossier de diplômes.");
+            }
+
+            $fileName = 'diplome_' . $id_user . '_' . time() . '.' . $extension;
+            $targetPath = $uploadDir . $fileName;
+            if (!move_uploaded_file($_FILES['diplome']['tmp_name'], $targetPath)) {
+                throw new Exception("Échec de l'upload du diplôme.");
+            }
+
+            $sqlPrestataire = "INSERT INTO prestataire (id_prestataire, statut, diplome_path)
+                               VALUES (:id, 'en_attente', :diplome)";
             $stmtPrestataire = $pdo->prepare($sqlPrestataire);
             $stmtPrestataire->execute([
-                ':id' => $id_user
+                ':id' => $id_user,
+                ':diplome' => 'uploads/diplomas/' . $fileName,
             ]);
 
         } elseif ($role === "client") {
@@ -56,6 +83,12 @@ try {
         }
 
         $pdo->commit(); 
+
+        if ($role === 'prestataire') {
+            $_SESSION['success'] = "Inscription réussie. Votre compte prestataire est en attente de validation par l'admin.";
+            header('Location: ../view/login.php');
+            exit();
+        }
 
         header('Location: ../view/index.php');
         exit();

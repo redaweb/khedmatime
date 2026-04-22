@@ -1,3 +1,9 @@
+<?php
+session_start();
+$error = $_SESSION['error'] ?? null;
+$success = $_SESSION['success'] ?? null;
+unset($_SESSION['error'], $_SESSION['success']);
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -40,6 +46,16 @@
                 </div>
 
                 <form class="space-y-4" action="../model/login.php" method="POST">
+                    <?php if ($error): ?>
+                        <div class="bg-red-50 border border-red-200 text-red-700 text-sm p-3 rounded-md">
+                            <?php echo htmlspecialchars($error); ?>
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($success): ?>
+                        <div class="bg-green-50 border border-green-200 text-green-700 text-sm p-3 rounded-md">
+                            <?php echo htmlspecialchars($success); ?>
+                        </div>
+                    <?php endif; ?>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
                         <input type="tel" name="telephone" required placeholder="07xxxxx" 

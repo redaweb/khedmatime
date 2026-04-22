@@ -7,11 +7,12 @@ include '../config/db.php';
 
 $is_prestataire = false;
 $is_client = false;
+$is_admin = false;
 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 
-    $check_prest = $pdo->prepare("SELECT id_prestataire FROM prestataire WHERE id_prestataire = ?");
+    $check_prest = $pdo->prepare("SELECT id_prestataire FROM prestataire WHERE id_prestataire = ? AND statut = 'accepte'");
     $check_prest->execute([$user_id]);
     if ($check_prest->fetch()) {
         $is_prestataire = true;
@@ -21,6 +22,12 @@ if (isset($_SESSION['user_id'])) {
     $check_client->execute([$user_id]);
     if ($check_client->fetch()) {
         $is_client = true;
+    }
+
+    $check_admin = $pdo->prepare("SELECT id_utilisateur FROM utilisateur WHERE id_utilisateur = ? AND role = 'admin'");
+    $check_admin->execute([$user_id]);
+    if ($check_admin->fetch()) {
+        $is_admin = true;
     }
 }
 
@@ -118,6 +125,18 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <a href="dashboard_client.php" 
                class="py-4 px-2 border-b-2 transition duration-300 text-sm font-bold flex items-center <?php echo ($current_page == 'services_payants.php') ? 'border-orange-500 text-orange-600' : 'border-transparent text-gray-500 hover:text-blue-700'; ?>">
                 <i class="fas fa-clipboard-list mr-2"></i> Demande
+            </a>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php if (isset($_SESSION['user_id']) && $is_admin): ?>
+<div class="bg-gray-50 border-b border-gray-200">
+    <div class="mx-auto px-6">
+        <div class="flex flex-wrap space-x-4 md:space-x-8">
+            <a href="dashboard_admin.php"
+               class="py-4 px-2 border-b-2 transition duration-300 text-sm font-bold flex items-center <?php echo ($current_page === 'dashboard_admin.php') ? 'border-orange-500 text-orange-600' : 'border-transparent text-gray-500 hover:text-blue-700'; ?>">
+                <i class="fas fa-user-shield mr-2"></i> Admin - Comptes
             </a>
         </div>
     </div>

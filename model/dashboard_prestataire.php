@@ -13,6 +13,9 @@ try {
     if (!$prestataire) {
         die("Accès refusé. أنت لست prestataire.");
     }
+    if (($prestataire['statut'] ?? 'en_attente') !== 'accepte') {
+        die("Votre compte prestataire n'est pas encore validé par l'admin.");
+    }
 
     $stmt_services = $pdo->prepare("SELECT * FROM service WHERE id_prestataire = :id");
     $stmt_services->execute(['id' => $user_id]);
