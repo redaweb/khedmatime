@@ -72,8 +72,8 @@ if (!isset($categoriesConfig[$categoryKey])) {
     echo '<h1 class="text-2xl font-bold text-gray-900 mb-2">Categorie invalide</h1>';
     echo '<p class="text-gray-600 mb-6">Choisissez une categorie depuis la page d accueil.</p>';
     echo '<a href="index.php" class="inline-flex items-center bg-blue-900 text-white px-4 py-2 rounded-lg hover:bg-orange-500 transition">Retour</a>';
-    echo '</div>';
-    include '../includes/footer.php';
+    echo '</div>';//test
+    include '../includes/footer.php'; 
     exit;
 }
 
